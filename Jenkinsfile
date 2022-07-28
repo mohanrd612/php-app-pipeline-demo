@@ -56,7 +56,7 @@ pipeline {
                         // sh "docker push ${dockerPublisherName}/${dockerRepoName}"
                         // }
                         
-                    } 
+                  //  } 
                 }
             }
         }
