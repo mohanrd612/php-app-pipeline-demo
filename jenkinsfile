@@ -31,7 +31,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    if (branch == 'master' || branch == 'dev'){
+                    if (branch == 'main' || branch == 'dev'){
                         sh "docker rmi ${apacheLocalImage} || true"
                         sh "docker build -t ${apacheLocalImage} apache/"
 
@@ -46,7 +46,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    if (branch == 'master' || branch == 'dev'){
+                    if (branch == 'main' || branch == 'dev'){
                         sh "docker tag ${apacheLocalImage} ${dockerPublisherName}/${dockerRepoName}:${apacheLocalImage}V.${BUILD_NUMBER}"
                         sh "docker tag ${mysqlLocalImage} ${dockerPublisherName}/${dockerRepoName}:${mysqlLocalImage}V.${BUILD_NUMBER}"
                         
