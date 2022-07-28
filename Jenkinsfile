@@ -31,14 +31,14 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    if (branch == 'main' || branch == 'dev'){
+                    // if (branch == 'main' || branch == 'dev'){
                         sh "docker rmi ${apacheLocalImage} || true"
                         sh "docker build -t ${apacheLocalImage} apache/"
 
                         sh "docker rmi ${mysqlLocalImage} || true"
                         sh "docker build -t ${mysqlLocalImage} mysql/"
                         sh "/usr/local/bin/docker-compose -f docker-compose.yml up -d"
-                    }
+               //     }
                 }
             }
         }
@@ -46,7 +46,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    if (branch == 'main' || branch == 'dev'){
+                    // if (branch == 'main' || branch == 'dev'){
                         sh "docker tag ${apacheLocalImage} ${dockerPublisherName}/${dockerRepoName}:${apacheLocalImage}V.${BUILD_NUMBER}"
                         sh "docker tag ${mysqlLocalImage} ${dockerPublisherName}/${dockerRepoName}:${mysqlLocalImage}V.${BUILD_NUMBER}"
                         
