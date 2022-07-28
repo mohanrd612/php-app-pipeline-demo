@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+        apache:
+                build: ./apache
+                image: "apache2-image"
+                container_name: apache-con
+                ports:
+                        - 8888:80
+                expose:
+                        - '80'
+                volumes:
+                        - ./apache:/var/www/html
+                depends_on:
+                        - mysql
+        mysql:
+                build: ./mysql
+                image: "mysql-image"
+                container_name: mysql-con
+                ports:
+                        - 3306:3306 
+                expose:
+                        - '3306'
+                volumes:
+                        - ./mysql:/docker-entrypont-initdb.d
+                environment: 
+                        MYSQL_DATABASE: lamp_task
+                        MYSQL_USERNAME: root
+                        MYSQL_PASSWORD: root
+                        MYSQL_ROOT_PASSWORD: root
