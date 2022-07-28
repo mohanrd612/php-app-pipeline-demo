@@ -21,8 +21,8 @@
         state: present
     - name: Start the container
       docker_container:
-        name: php-app-demo
-        image: "php-app-demo"
+        name: srf-php-app
+        image: "srf-php-app"
         state: started
         published_ports:
           - 0.0.0.0:8888:80
