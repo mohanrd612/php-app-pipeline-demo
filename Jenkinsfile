@@ -32,12 +32,12 @@ pipeline {
             steps {
                 script {
                     // if (branch == 'main' || branch == 'dev'){
-                        sh "docker rmi ${apacheLocalImage} || true"
-                        sh "docker build -t ${apacheLocalImage} apache/"
+                        sh "sudo docker rmi ${apacheLocalImage} || true"
+                        sh "sudo docker build -t ${apacheLocalImage} apache/"
 
-                        sh "docker rmi ${mysqlLocalImage} || true"
-                        sh "docker build -t ${mysqlLocalImage} mysql/"
-                        sh "/usr/local/bin/docker-compose -f docker-compose.yml up -d"
+                        sh "sudo docker rmi ${mysqlLocalImage} || true"
+                        sh "sudo docker build -t ${mysqlLocalImage} mysql/"
+                        sh "sudo /usr/local/bin/docker-compose -f docker-compose.yml up -d"
                //     }
                 }
             }
@@ -47,8 +47,8 @@ pipeline {
             steps {
                 script {
                     // if (branch == 'main' || branch == 'dev'){
-                        sh "docker tag ${apacheLocalImage} ${dockerPublisherName}/${dockerRepoName}:${apacheLocalImage}V.${BUILD_NUMBER}"
-                        sh "docker tag ${mysqlLocalImage} ${dockerPublisherName}/${dockerRepoName}:${mysqlLocalImage}V.${BUILD_NUMBER}"
+                        sh "sudo docker tag ${apacheLocalImage} ${dockerPublisherName}/${dockerRepoName}:${apacheLocalImage}V.${BUILD_NUMBER}"
+                        sh "sudo docker tag ${mysqlLocalImage} ${dockerPublisherName}/${dockerRepoName}:${mysqlLocalImage}V.${BUILD_NUMBER}"
                         
                         // withCredentials([usernamePassword( credentialsId: 'docker-login', usernameVariable: 'USER', passwordVariable: 'PASSWORD')]) {
                         // def registry_url = "https://hub.docker.com/"
