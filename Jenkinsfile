@@ -37,7 +37,7 @@ pipeline {
 
                         sh "sudo docker rmi ${mysqlLocalImage} || true"
                         sh "sudo docker build -t ${mysqlLocalImage} mysql/"
-                        sh "/usr/local/bin/docker-compose -f docker-compose.yml up -d"
+                        sh "sudo /usr/local/bin/docker-compose -f docker-compose.yml up -d"
                //     }
                 }
             }
